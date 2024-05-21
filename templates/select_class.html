@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>
+            Выбор класса
+        </title>
+    </head>
+    <body>
+        <h1>Выберете класс</h1>
+        {% for i in  classes%}
+        <div>
+            <a href="/var/{{ i }}">{{ i }} класс</a>
+        </div>
+        {% endfor %}
+    </body>
+</html>

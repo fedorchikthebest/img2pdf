@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>
+            Выбор предмета
+        </title>
+    </head>
+    <body>
+        <h1>Выберете предмет</h1>
+        {% for i in  predmets %}
+        <div>
+            <a href="/var/{{ cl }}/{{ i }}">{{ i }}</a>
+        </div>
+
+        {% endfor %}
+    </body>
+</html>

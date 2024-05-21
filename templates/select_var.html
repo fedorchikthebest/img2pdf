@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>
+            Выберете вариант
+        </title>
+    </head>
+    <body>
+        <h1>
+            Выберете вариант
+        </h1>
+        {% for i in  variants%}
+        <div>
+            <a href="/get_var/{{ i }}">Вариант {{ i }}</a>
+        </div>
+        {% endfor %}
+    </body>
+</html>
