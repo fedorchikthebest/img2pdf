@@ -4,3 +4,7 @@
 images.pdf
 test.py
 123.pdf
+/static/variants/answers/*.txt
+/static/variants/pdfs/*.pdf
+/questions/*
+/utils/__pycache__

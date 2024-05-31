@@ -28,8 +28,9 @@ def generate(class_, predmet):
     ansvers = []
     variant_id = uuid4()
     for i in os.listdir(f'./questions/{class_}/{predmet}'):
-        a = choice(os.listdir(f'./questions/{class_}/{predmet}/{i}'))
-        zadanija.append(f'./questions/{class_}/{predmet}/{i}/{a}')
+        if i != '.DS_Storage':
+            a = choice(os.listdir(f'./questions/{class_}/{predmet}/{i}'))
+            zadanija.append(f'./questions/{class_}/{predmet}/{i}/{a}')
         ansvers.append(a)
     with open(f'./static/variants/answers/{variant_id}.txt', 'w') as f:
         f.writelines(list(map(lambda x: x.split('_')[0], ansvers)))
