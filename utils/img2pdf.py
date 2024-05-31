@@ -12,10 +12,17 @@ PIXEL_SIZE = 0.264583 # размер пикселя в мм
 SHAKAL = 0.5 # Степень сжатия изображения
 OTSTUP_PX = 5
 
-ANSWER_PATH = "./utils/data/answer.png"
-ANSWER_IMAGE = Image.open(ANSWER_PATH)
-ANSWER_HEIGHT = ANSWER_IMAGE.size[1]
-ANSWER_WEIGHT = ANSWER_IMAGE.size[0]
+current_number = 1
+
+VARIANT = ""
+
+TEXT_HEIGHT = 20
+TEXT_HEIGHT_MM = ceil(TEXT_HEIGHT * PIXEL_SIZE)
+ZATICHKA_WEIGHT = 0
+
+IMAGE_INTERVAL = 20
+
+FONT_PATH = "./utils/data/timesnewromanpsmt.ttf"
 
 img_on_pages = [] #Размещение картинок на страницах
 img_sizes = [] # размеры картинок в mm
@@ -45,18 +52,18 @@ def get_sizes(image_paths: list): # Получение размеров изою
 
 
 def make_page(): # Создание удоборимой страници
-    images_size = OTSTUP_PX
-    ans = []
+    images_size = OTSTUP_PX + TEXT_HEIGHT
+    ans = [(f"text:Вариант №{VARIANT}", OTSTUP_PX, ZATICHKA_WEIGHT)]
     while images_size < PAGE_SIZE_Y - OTSTUP_PX and len(img_sizes):
         for i in range(len(img_sizes)):
-            if images_size + px_to_mm(img_sizes[i][1]) + ANSWER_HEIGHT <= PAGE_SIZE_Y - OTSTUP_PX:
-                images_size += px_to_mm(img_sizes[i][1]) + ANSWER_HEIGHT
+            if images_size + px_to_mm(img_sizes[i][1]) + TEXT_HEIGHT <= PAGE_SIZE_Y - OTSTUP_PX:
+                images_size += px_to_mm(img_sizes[i][1]) + TEXT_HEIGHT
                 ans.append(img_sizes.pop(i))
-                ans.append((ANSWER_PATH, ANSWER_HEIGHT, ANSWER_WEIGHT))
+                ans.append(("text:Ответ", TEXT_HEIGHT, ZATICHKA_WEIGHT))
                 break
             if i == len(img_sizes):
                 return ans
-            if images_size + px_to_mm(img_sizes[-1][1]) + ANSWER_HEIGHT > PAGE_SIZE_Y - OTSTUP_PX:
+            if images_size + px_to_mm(img_sizes[-1][1]) + TEXT_HEIGHT > PAGE_SIZE_Y - OTSTUP_PX:
                 return ans
     return ans
 
@@ -71,16 +78,27 @@ def make_pages(image_paths: list): # Планировка страниц
 
  
 def img2pdf(pdf_name: str, image_paths: list): # Отрисовка страниц
+    global VARIANT, current_number
+    VARIANT = pdf_name.split('/')[-1]
     pdf = FPDF()
+    pdf.add_font("Rus", fname=FONT_PATH, style="", uni=True)
     make_pages(image_paths)
     print(img_sizes)
     for i in img_on_pages:
         print(i)
         pdf.add_page()
         pos =  OTSTUP_PX
+        pdf.set_font("Rus", "", TEXT_HEIGHT)
         for j in i:
-            pdf.image(f'{j[0]}', x=OTSTUP_PX, y=pos, w=px_to_mm(j[2]), h=px_to_mm(j[1]))
-            pos = pos + px_to_mm(j[1])
+            if j[0].split(':')[0] == "text":
+                pdf.text(OTSTUP_PX, pos + TEXT_HEIGHT_MM, j[0].split(':')[1])
+                pos = pos + TEXT_HEIGHT
+            else:
+                pdf.image(f'{j[0]}', x=OTSTUP_PX, y=pos, w=px_to_mm(j[2]), h=px_to_mm(j[1]))
+                pdf.text(OTSTUP_PX, pos + TEXT_HEIGHT_MM, '№' + str(current_number))
+                current_number += 1
+                pos = pos + px_to_mm(j[1])
     pdf.output(f"{pdf_name}.pdf")
     img_on_pages.clear()
     img_sizes.clear()
+    current_number = 1
