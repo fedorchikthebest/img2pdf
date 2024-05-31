@@ -2,14 +2,14 @@
 <html lang="ru">
     <head>
         <title>
-            Выбор предмета
+            Выбор класса
         </title>
     </head>
     <body>
-        <h1>Выберете предмет</h1>
+        <h1>Выберете класс</h1>
         {% for i in  predmets %}
         <div>
-            <a href="/var/{{ cl }}/{{ i }}">{{ i }}</a>
+            <a href="/var/{{ cl }}/{{ i }}">{{ i }} класс</a>
         </div>
 
         {% endfor %}

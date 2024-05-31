@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>
+            Главная
+        </title>
+    </head>
+    <body>
+        <h1>Генератор вариантов</h1>
+        <div>
+            <form method="post">
+                {% for name, count in questions %}
+                <div>
+                    <li>Задание {{ name }}</li>
+                    <input name="{{ name }}" type="number" min="0" max="{{ count }}" value="1">
+                </div>
+                {% endfor %}
+                <input type="submit" value="Создать вариант">
+            </form>
+        </div>
+    </body>
+</html>
