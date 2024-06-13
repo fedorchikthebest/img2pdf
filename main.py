@@ -26,28 +26,36 @@ def select_predmet():
 
 @app.route('/var/<predmet>')
 def get_class(predmet):
-    return render_template('select_predmet.html', predmets=os.lis(f'./questions/{predmet}'), cl=predmet)
+    return render_template('select_predmet.html', predmets=os.listdir(f'./questions/{predmet}'), cl=predmet)
 
 
 @app.route('/var/<predmet>/<class_>', methods=["GET", "POST"])
 def generate(predmet, class_):
     if request.method == "GET":
         questions = []
-        for i in os.listdir(f'./questions/{predmet}/{class_}'):
-            questions.append((i, len(os.listdir(f'./questions/{predmet}/{class_}/{i}'))))
+        for i in os.listdir(f'{os.getcwd()}/questions/{predmet}/{class_}'):
+            questions.append((i, len(os.listdir(f'{os.getcwd()}/questions/{predmet}/{class_}/{i}'))))
         return render_template("select_questions.html", questions=questions)
     zadanija = []
     ansvers = []
-    variant_id = uuid4()
+    variant_id = 0
+    try:
+        with open(f'{os.getcwd()}/questions/{predmet}/{class_}/var.bin', 'rb') as f:
+            variant_id = int.from_bytes(f.read()) + 1
+        with open(f'{os.getcwd()}/questions/{predmet}/{class_}/var.bin', 'wb') as f:
+            f.write(variant_id.to_bytes(8))
+    except FileNotFoundError:
+        with open(f'{os.getcwd()}/questions/{predmet}/{class_}/var.bin', 'wb') as f:
+            f.write(variant_id.to_bytes(8))
     for i in request.form.keys():
         if i != '.DS_Storage':
-            a = fshuffle(os.listdir(f'./questions/{predmet}/{class_}/{i}'))[:int(request.form.get(i))]
+            a = fshuffle(os.listdir(f'{os.getcwd()}/questions/{predmet}/{class_}/{i}'))[:int(request.form.get(i))]
             for j in a:
-                zadanija.append(f'./questions/{predmet}/{class_}/{i}/{j}')
+                zadanija.append(f'{os.getcwd()}/questions/{predmet}/{class_}/{i}/{j}')
         ansvers += a
-    with open(f'./static/variants/answers/{variant_id}.txt', 'w') as f:
+    with open(f'{os.getcwd()}/static/variants/answers/{variant_id}.txt', 'w') as f:
         f.write('\n'.join(list(map(lambda x: x.split('_')[0], ansvers))))
-    img2pdf(f'./static/variants/pdfs/{variant_id}', zadanija)
+    img2pdf(f'{os.getcwd()}/static/variants/pdfs/{variant_id}', zadanija)
     return redirect(f'/get_var/{variant_id}')
 
 
