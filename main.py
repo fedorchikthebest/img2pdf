@@ -40,12 +40,12 @@ def generate(predmet, class_):
     ansvers = []
     variant_id = 0
     try:
-        with open(f'{os.getcwd()}/questions/{predmet}/{class_}/var.bin', 'rb') as f:
+        with open(f'{os.getcwd()}/questions/var.bin', 'rb') as f:
             variant_id = int.from_bytes(f.read()) + 1
-        with open(f'{os.getcwd()}/questions/{predmet}/{class_}/var.bin', 'wb') as f:
+        with open(f'{os.getcwd()}/questions/var.bin', 'wb') as f:
             f.write(variant_id.to_bytes(8))
     except FileNotFoundError:
-        with open(f'{os.getcwd()}/questions/{predmet}/{class_}/var.bin', 'wb') as f:
+        with open(f'{os.getcwd()}/questions/var.bin', 'wb') as f:
             f.write(variant_id.to_bytes(8))
     for i in request.form.keys():
         if i != '.DS_Storage':
