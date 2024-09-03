@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <title>
-            Главная
-        </title>
-    </head>
-    <body>
-        <h1>Генератор вариантов</h1>
+{% extends "base.html" %}
+{% block content %}
+
+        <h1 class="my-3">Генератор вариантов</h1>
         <div>
             <form method="post">
                 {% for name, count in questions %}
-                <div>
-                    <li>Задание {{ name }}</li>
-                    <input name="{{ name }}" type="number" min="0" max="{{ count }}" value="1">
+                <div class="h-100 d-flex align-items-center justify-content-center my-2">
+                    <button type="button" class="btn btn-outline-dark"> {{ name.capitalize() }}
+                        <input name="{{ name }}" type="number" min="0" max="{{ count }}" value="1" class="ml-3"></button>
                 </div>
                 {% endfor %}
-                <input type="submit" value="Создать вариант">
+                <div class="h-100 d-flex align-items-center justify-content-center my-4">
+                <button type="button" class="btn btn-outline-success"><input type="submit" value="Создать вариант" style="border: 0;background: 0;"></button>
+                </div>
             </form>
         </div>
-    </body>
-</html>
+{% endblock %}

@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <title>
-            Главная
-        </title>
-    </head>
-    <body>
-        <h1>Генератор вариантов</h1>
-        <div>
-            <a href="/var">Создать вариант</a>
+{% extends "base.html" %}
+{% block content %}
+        <h1 class="my-3">Генератор вариантов</h1>
+        <div class="h-100 d-flex align-items-center justify-content-center my-2">
+            <a href="/var"><button type="button" class="btn btn-outline-success">Создать вариант</button></a>
         </div>
-        <div>
-            <a href="/select_var">Список вариантов</a>
+        <div class="h-100 d-flex align-items-center justify-content-center my-4">
+
+        <form action="" method="post">
+            <p>
+            <label for="var">Введите номер варианта</label>
+            <input type="text" name="var">
+                <button type="button" class="btn btn-outline-secondary"><input type="submit" value="Открыть" style="border: 0;background: 0;"></button>
+            </p>
+     </form>
         </div>
-    </body>
-</html>
+{% endblock %}

@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <title>
-            Вариант {{ variant }}
-        </title>
-    </head>
-    <body>
-        <h1>
-            Вариант №{{ variant }}
+{% extends "base.html" %}
+{% block content %}
+        <h1 class="my-3">
+            Вариант № {{ variant }}
         </h1>
-        <div>
-            <a href="/static/variants/pdfs/{{ variant }}.pdf">Вариант</a>
+        <div class="h-100 d-flex align-items-center justify-content-center my-2">
+            <a download href="/static/variants/pdfs/{{ variant }}.pdf"><button type="button" class="btn btn-outline-success">Скачать вариант</button></a>
         </div>
-        <div>
-            <a href="/static/variants/answers/{{ variant }}.txt">Ответы</a>
+        <div class="h-100 d-flex align-items-center justify-content-center my-2">
+            <a download href="/static/variants/answers/{{ variant }}.txt"><button type="button" class="btn btn-outline-secondary">Скачать ответы</button></a>
         </div>
-    </body>
-</html>
+{% endblock %}

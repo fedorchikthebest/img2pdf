@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <title>
-            Выберете вариант
-        </title>
-    </head>
-    <body>
-        <h1>
-            Выберете вариант
+{% extends "base.html" %}
+{% block content %}
+        <h1 class="my-3">
+            Выберите вариант
         </h1>
         {% for i in  variants%}
         <div>
             <a href="/get_var/{{ i }}">Вариант {{ i }}</a>
         </div>
         {% endfor %}
-    </body>
-</html>
+{% endblock %}

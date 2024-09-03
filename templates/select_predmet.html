@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <title>
-            Выбор класса
-        </title>
-    </head>
-    <body>
-        <h1>Выберете класс</h1>
+{% extends "base.html" %}
+{% block content %}
+        <h1 class="my-3">Выберите класс</h1>
         {% for i in  predmets %}
-        <div>
-            <a href="/var/{{ cl }}/{{ i }}">{{ i }} класс</a>
+        <div class="h-100 d-flex align-items-center justify-content-center my-2">
+            <a href="/var/{{ cl }}/{{ i }}"><button type="button" class="btn btn-outline-dark">{{ i }}</button></a>
         </div>
 
         {% endfor %}
-    </body>
-</html>
+{% endblock %}
