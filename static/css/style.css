@@ -1,0 +1,150 @@
+body {
+    height: 100%;
+    font-family: 'Comfortaa', cursive;
+}
+
+
+.form-group{
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+}
+
+.done{
+    color: #999;
+    text-decoration: line-through;
+    font-size: 2em;
+}
+
+.not-done{
+    font-size: 2em;
+}
+
+.checkbox-img{
+    width: 1em;
+}
+
+.delete-img{
+    width: 1em;
+    float: right;
+}
+
+
+.one-deal {
+    border-radius: 3.25rem;
+    border: 1px solid #dee2e6;
+    box-sizing: border-box;
+    padding: 1em 1em 1em 1em;
+    text-align: left;
+    margin-top: 1em;
+}
+
+.delete-img:hover {
+    transition: all 0.6s ease 0s;
+    filter: drop-shadow(0px 2px 5px red);
+}
+
+.checkbox-img:hover {
+    transition: all 0.6s ease 0s;
+    filter: drop-shadow(1px 2px 3px green);
+}
+
+.btn-secondary{
+    margin: 1em auto;
+    width: 22em;
+    display: block;
+    color: #fff;
+    background-color: #307bbf;
+    border-color: #023f74;
+    border-radius: 1em;
+}
+
+h1 {
+    text-align: center;
+}
+
+.logo{
+    height: 2.5em;
+    margin-right: 15px;
+}
+
+.navbar{
+background-color: #deedfa !important;
+}
+
+.upload{
+    position: relative;
+    transform: translate(-50%);
+    margin:auto;
+    display: inline-block;
+}
+
+.welcome{
+    text-align: center;
+    font-size: 1.4em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3.25rem;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+.stat{
+    font-size: 32px;
+    text-align: center;
+}
+
+.categories{
+    overflow: hidden;
+    margin: 0 25% 0 25%;
+    width: 100%;
+    font-size: 1.3em;
+}
+
+.category{
+    float: left;
+    margin: 0 15px;
+    border: 1px solid #DEE2E9;
+    box-sizing: border-box;
+    border-radius: 12px;
+    padding: 0.2em 1.4em;
+}
+
+.category a{
+    color: black;
+}
+
+.category:hover {
+    border-color: #0dd303;
+}
+.category a:hover{
+    color: #0dd303;
+    text-decoration: None;
+}
+
+.current-category{
+    float: left;
+    margin: 0 15px;
+    border: 3px solid #0dd303;
+    box-sizing: border-box;
+    border-radius: 12px;
+    padding: 0.2em 1.4em;
+}
+
+.current-category a{
+    color: #0dd303;
+}
+
+.current-category a:hover{
+    color: #0dd303;
+    text-decoration: None;
+}
+

@@ -5,6 +5,16 @@ images.pdf
 test.py
 123.pdf
 /static/variants/answers/*.txt
-/static/variants/pdfs/*.pdf
+/templates/variants/pdf/*.pdf
+/templates/variants/answers/*.txt
 /questions/*
 /utils/__pycache__
+static/.DS_Store
+session.key
+code-oss.core
+templates/variants/pdfs/*.pdf
+static/variants/pdfs/*.pdf
+variants_map/*
+static/variants/.DS_Store
+templates/variants/.DS_Store
+user_answers/*_*

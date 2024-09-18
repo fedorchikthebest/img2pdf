@@ -4,9 +4,12 @@
             Вариант № {{ variant }}
         </h1>
         <div class="h-100 d-flex align-items-center justify-content-center my-2">
-            <a download href="/static/variants/pdfs/{{ variant }}.pdf"><button type="button" class="btn btn-outline-success">Скачать вариант</button></a>
+            <a href="/static/variants/pdfs/{{ variant }}.pdf"><button type="button" class="btn btn-outline-success">Скачать вариант</button></a>
         </div>
         <div class="h-100 d-flex align-items-center justify-content-center my-2">
-            <a download href="/static/variants/answers/{{ variant }}.txt"><button type="button" class="btn btn-outline-secondary">Скачать ответы</button></a>
+            <a href="/static/variants/answers/{{ variant }}.txt"><button type="button" class="btn btn-outline-secondary">Скачать ответы</button></a>
+        </div>
+        <div class="h-100 d-flex align-items-center justify-content-center my-2">
+            <a href="/test/{{ e_var }}"><button type="button" class="btn btn-outline-secondary">Электронный тест</button></a>
         </div>
 {% endblock %}
