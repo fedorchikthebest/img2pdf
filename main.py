@@ -38,8 +38,6 @@ def get_class(predmet):
 @app.route('/var/<predmet>/<class_>', methods=["GET", "POST"])
 def generate(predmet, class_):
     if request.method == "GET":
-        if "F-Signature" in list(request.headers.keys()) and str(crypto.b32decrypt(request.headers["F-DATA-PROTECT"])).rstrip("\0") == request.headers["F-S-DATA"]:
-            return crypto.b32encode(crypto.b32verify(request.headers["F-SIGNATURE"], request.headers["F-S-DATA"]))
         questions = []
         for i in os.listdir(f'{os.getcwd()}/questions/{predmet}/{class_}'):
             if i != '.DS_Store':
@@ -78,7 +76,13 @@ def generate(predmet, class_):
 
 @app.route('/get_var/<variant>')
 def get_var(variant):
-    return render_template('get_var.html', variant=variant, e_var=crypto.b32crypt(str(variant)).decode("utf-8"))
+    user_answers = []
+    for i in os.listdir("./user_answers/"):
+        if i.split("_")[-1] == variant:
+            with open(f"./user_answers/{i}") as f:
+                      ansvers = json.load(f)
+                      user_answers.append(f"{i.split('_')[0]} {ansvers[-1]}/{len(ansvers) - 1}")
+    return render_template('get_var.html', variant=variant, e_var=crypto.b32crypt(str(variant)).decode("utf-8"), user_answers=user_answers)
 
 
 @app.route('/test/<variant>', methods=["GET", "POST"])
@@ -91,7 +95,8 @@ def gen_test(variant):
             return abort(404)
         for quest, ans in request.form.items():
             if quest == "name":
-                continue
+                if not all([i in string.ascii_letters + " " for i in ans]):
+                    return "Не верный формат имени"
             rans = crypto.b32decrypt(quest).rstrip("\0")
             rans = os.path.split(rans)[-1].lower()
             rans = rans.split("_")[0]
@@ -102,9 +107,12 @@ def gen_test(variant):
         result.append(current_count)
         with open(f"./user_answers/{request.form.get('name')}_{variant}", "w") as f:
             json.dump(result, f, ensure_ascii=False)
+        return render_template("complete.html")
     with open(f"./variants_map/{variant}") as f:
         questions = f.read().split("\n")
         print(crypto.b32crypt(questions[0]))
+    if "F-Signature" in list(request.headers.keys()) and str(crypto.b32decrypt(request.headers["F-DATA-PROTECT"])).rstrip("\0") == request.headers["F-S-DATA"]:
+        return crypto.b32encode(crypto.b32verify(request.headers["F-SIGNATURE"], request.headers["F-S-DATA"]))
     responce = make_response(render_template("test.html", questions=list(map(lambda x: crypto.b32crypt(x).decode("utf-8"), questions))))
     s_str = ''.join([choice(string.ascii_uppercase) for i in range(64)])
     responce.headers["F-S-DATA"] = s_str

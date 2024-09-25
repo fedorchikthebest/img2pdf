@@ -12,4 +12,9 @@
         <div class="h-100 d-flex align-items-center justify-content-center my-2">
             <a href="/test/{{ e_var }}"><button type="button" class="btn btn-outline-secondary">Электронный тест</button></a>
         </div>
+		{% for i in user_answers %}
+		<div>
+			{{ i }}
+		</div>
+		{% endfor %}
 {% endblock %}
