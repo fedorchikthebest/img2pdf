@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table>
+    <tr><th>Верный ответ</th><th>Ответ Ученика</th></tr> <!--ряд с ячейками заголовков-->
+    {% for i in ansvers %}
+    <tr><td>{{ i[0] }}</td><td> {{ i[1] }} </td></tr>
+    {% endfor %}
+</table>
+<div>
+    Итоговый результат: {{ result }}
+</div>
+{% endblock %}

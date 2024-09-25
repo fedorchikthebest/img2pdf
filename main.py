@@ -81,7 +81,7 @@ def get_var(variant):
         if i.split("_")[-1] == variant:
             with open(f"./user_answers/{i}") as f:
                       ansvers = json.load(f)
-                      user_answers.append(f"{i.split('_')[0]} {ansvers[-1]}/{len(ansvers) - 1}")
+                      user_answers.append([f"{i.split('_')[0]} {ansvers[-1]}/{len(ansvers) - 1}", i])
     return render_template('get_var.html', variant=variant, e_var=crypto.b32crypt(str(variant)).decode("utf-8"), user_answers=user_answers)
 
 
@@ -133,5 +133,17 @@ def get_questions(question):
     else:
         return abort(404)
 
+
+@app.route("/get_user_results/<user>")
+def get_results(user):
+    with open(f"./user_answers/{user}") as f:
+        usr = json.load(f)
+
+    return render_template("user_ansvers.html", ansvers=usr[:-1], result=f"{usr[-1]}/{len(usr) - 1}")
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 app.run()
