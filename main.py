@@ -95,8 +95,9 @@ def gen_test(variant):
             return abort(404)
         for quest, ans in request.form.items():
             if quest == "name":
-                if not all([i in string.ascii_letters + " " for i in ans]):
+                if not all([i.lower() in string.ascii_letters + " " + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" for i in ans]):
                     return "Не верный формат имени"
+                continue
             rans = crypto.b32decrypt(quest).rstrip("\0")
             rans = os.path.split(rans)[-1].lower()
             rans = rans.split("_")[0]
