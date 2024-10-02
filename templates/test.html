@@ -4,11 +4,12 @@
 <div class="question">
     <form method="post">
 		<input type="text" class="ans_pole" name="name"/>
+		<input type="text" name="class">
 		{% for i in questions %}
         <img src="/api/get_question/{{ i }}">
         <input type="text" class="ans_pole" name="{{ i }}"/>
 		{% endfor %}
-		<input class="check" type="submit">
+		<input class="check" type="submit" placeholder="Отправить">
     </form>
 </div>
 <script src="../static/js/test.js"></script>

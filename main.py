@@ -94,8 +94,8 @@ def gen_test(variant):
         if os.path.exists(f"./user_answers/{request.form.get('name')}_{variant}"):
             return abort(404)
         for quest, ans in request.form.items():
-            if quest == "name":
-                if not all([i.lower() in string.ascii_letters + " " + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" for i in ans]):
+            if quest == "name" or quest == "class":
+                if not all([i.lower() in string.ascii_lowercase + " " + "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" + string.digits for i in ans]):
                     return "Не верный формат имени"
                 continue
             rans = crypto.b32decrypt(quest).rstrip("\0")
@@ -106,7 +106,7 @@ def gen_test(variant):
             if rans == ans.lower():
                 current_count += 1
         result.append(current_count)
-        with open(f"./user_answers/{request.form.get('name')}_{variant}", "w") as f:
+        with open(f"./user_answers/{request.form.get('name')} {request.form.get('class')}_{variant}", "w") as f:
             json.dump(result, f, ensure_ascii=False)
         return render_template("complete.html")
     with open(f"./variants_map/{variant}") as f:
@@ -119,6 +119,7 @@ def gen_test(variant):
     responce.headers["F-S-DATA"] = s_str
     responce.headers["F-DATA-PROTECT"] = crypto.b32crypt(s_str).decode("utf-8")
     return responce
+
 
 @app.route('/select_var')
 def select_var():
