@@ -19,16 +19,16 @@ with open("key.pub", "rb") as f:
     PKEY = f.read()
 
 
-def b32crypt(text):
+def b32crypt(text, key=SESSION_KEY):
     cipher_obj = gostcrypto.gostcipher.new("kuznechik",
-                                           SESSION_KEY, gostcrypto.gostcipher.MODE_CFB)
+                                           key, gostcrypto.gostcipher.MODE_CFB)
     cipher_block = cipher_obj.encrypt(bytes(text, encoding="utf-8") + bytes("\0" * (16 - len(text)), encoding="utf-8"))
     return b32encode(cipher_block)
 
 
-def b32decrypt(data):
+def b32decrypt(data, key=SESSION_KEY):
     cipher_obj = gostcrypto.gostcipher.new("kuznechik",
-                                           SESSION_KEY, gostcrypto.gostcipher.MODE_CFB)
+                                           key, gostcrypto.gostcipher.MODE_CFB)
     cipher_block = cipher_obj.decrypt(b32decode(data))
     return cipher_block.decode("utf-8")
 

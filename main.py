@@ -27,7 +27,7 @@ def index():
 
 @app.route('/var')
 def select_predmet():
-    return render_template('select_class.html', classes=list(filter(lambda x: x[0] != "." and x != 'var.bin', os.listdir(f'./questions'))))
+    return render_template('select_class.html', classes=list(filter(lambda x: x[0] != "." and x != 'var.bin', next(os.walk(f'./questions'))[1])))
 
 
 @app.route('/var/<predmet>')
