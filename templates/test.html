@@ -3,7 +3,9 @@
 
 <div class="question">
     <form method="post">
+		<a>Ваше ФИО</a>
 		<input type="text" class="ans_pole" name="name"/>
+		<a>Ваш класс</a>
 		<input type="text" name="class">
 		{% for i in questions %}
         <img src="/api/get_question/{{ i }}">

@@ -10,7 +10,7 @@ if os.path.exists("session.key"):
     with open("session.key", "rb") as f:
         SESSION_KEY = f.read()
 else:
-    SESSION_KEY = gostcrypto.gostrandom.new(32)
+    SESSION_KEY = gostcrypto.gostrandom.new(32).random()
     with open("session.key", "wb") as f:
         f.write(SESSION_KEY)
 
