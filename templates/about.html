@@ -1,27 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-5">
-            <img src="static/img/fedor.jpg">
+    <div class="row justify-content-center my-4">
+        <div class="col-12 col-md-5 text-center mb-4">
+            <img src="static/img/fedor.jpg" class="img-fluid rounded">
         </div>
-        <div class="col-2">
-
+        <div class="col-12 col-md-5 text-center">
+            <img src="static/img/geny.jpg" class="img-fluid rounded">
         </div>
-        <div class="col-5">
-            <img src="static/img/geny.jpg">
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h1 class="display-4 mb-3">Горленко Фёдор Сергеевич</h1>
+            <p class="lead mb-4">
+                Гений, миллиардер, филантроп 21 века.
+                Главный разработчик img2pdf и protonID.
+                Генеральный директор компании gimonchik©.
+            </p>
+            <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                <a href="https://github.com/fedorchikthebest" class="btn btn-outline-dark">Мой гитхаб</a>
+                <a href="xmpp:gimonchik@gimonchik.ru" class="btn btn-outline-dark">Мой джаббер</a>
+                <a href="https://t.me/enternet_king" class="btn btn-outline-dark">Мой Телеграм канал</a>
+            </div>
         </div>
     </div>
 </div>
-
-
-<h1>Горленко Фёдор Сергеевич</h1>
-<div>
-    Гений, миллиардер, филантроп 21 века.
-    Главный разраюотчик img2pdf и protonID.
-    Генеральный директор компании gimonchik©.
-</div>
-<a href="https://github.com/fedorchikthebest">Мой гитхаб</a>
-<a href="xmpp:gimonchik@gimonchik.ru"> Мой джаббер </a>
-<a href="https://t.me/enternet_king"> Мой Телеграм канал </a>
 {% endblock %}

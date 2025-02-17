@@ -1,18 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="question">
-    <form method="post">
-		<a>Ваше ФИО</a>
-		<input type="text" class="ans_pole" name="name"/>
-		<a>Ваш класс</a>
-		<input type="text" name="class">
-		{% for i in questions %}
-        <img src="/api/get_question/{{ i }}">
-        <input type="text" class="ans_pole" name="{{ i }}"/>
-		{% endfor %}
-		<input class="check" type="submit" placeholder="Отправить">
-    </form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <form method="post" class="my-4">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Ваше ФИО</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="class" class="form-label">Ваш класс</label>
+                    <input type="text" class="form-control" id="class" name="class" required>
+                </div>
+                
+                {% for i in questions %}
+                <div class="mb-4">
+                    <img src="/api/get_question/{{ i }}" class="img-fluid mb-2">
+                    <input type="text" class="form-control ans_pole" name="{{ i }}" required>
+                </div>
+                {% endfor %}
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-<script src="../static/js/test.js"></script>
 {% endblock %}

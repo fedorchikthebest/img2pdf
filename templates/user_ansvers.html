@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-
-<table>
-    <tr><th>Верный ответ</th><th>Ответ Ученика</th></tr> <!--ряд с ячейками заголовков-->
-    {% for i in ansvers %}
-    <tr><td>{{ i[0] }}</td><td> {{ i[1] }} </td></tr>
-    {% endfor %}
-</table>
-<div>
-    Итоговый результат: {{ result }}
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Верный ответ</th>
+                    <th scope="col">Ответ Ученика</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in ansvers %}
+                <tr>
+                    <td>{{ i[0] }}</td>
+                    <td>{{ i[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="alert alert-info mt-4">
+        Итоговый результат: {{ result }}
+    </div>
 </div>
 {% endblock %}

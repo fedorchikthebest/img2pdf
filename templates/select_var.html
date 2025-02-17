@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-        <h1 class="my-3">
-            Выберите вариант
-        </h1>
-        {% for i in  variants%}
-        <div>
-            <a href="/get_var/{{ i }}">Вариант {{ i }}</a>
+<div class="container">
+    <h1 class="display-4 text-center my-4">Выберите вариант</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        {% for i in variants %}
+        <div class="col">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <a href="/get_var/{{ i }}" class="btn btn-outline-primary w-100">Вариант {{ i }}</a>
+                </div>
+            </div>
         </div>
         {% endfor %}
+    </div>
+</div>
 {% endblock %}

@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-        <h1 class="my-3">Генератор вариантов</h1>
-        <div class="h-100 d-flex align-items-center justify-content-center my-2">
-            <a href="/var"><button type="button" class="btn btn-outline-success">Создать вариант</button></a>
-        </div>
-        <div class="h-100 d-flex align-items-center justify-content-center my-4">
-
-        <form action="" method="post">
-            <p>
-            <label for="var">Введите номер варианта</label>
-            <input type="text" name="var">
-                <button type="button" class="btn btn-outline-secondary"><input type="submit" value="Открыть" style="border: 0;background: 0;"></button>
-            </p>
-     </form>
-        </div>
+<section>
+        <div class="container">
+            <h1 class="my-3 text-center">Генератор вариантов</h1>
+            <div class="row justify-content-center my-2">
+                <div class="col-12 col-md-6 text-center">
+                    <a href="/var" class="w-100">
+                        <button type="button" class="btn btn-outline-success w-100">Создать вариант</button>
+                    </a>
+                </div>
+            </div>
+            <div class="row justify-content-center my-4">
+                <div class="col-12 col-md-6">
+                    <form action="" method="post" class="text-center">
+                        <div class="form-group" style="margin-top: 10%;">
+                            <label for="var" class="my-4">Введите номер варианта</label>
+                            <div class="input-group">
+                                <input type="text" name="var" class="form-control" id="var">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-secondary">Открыть</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div></section>
 {% endblock %}
